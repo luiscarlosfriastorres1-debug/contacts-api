@@ -9,4 +9,8 @@ class Contact extends Model
 {
     /** @use HasFactory<\Database\Factories\ContactFactory> */
     use HasFactory;
+
+    public function profile(){
+        return this->hasOne(ContactProfile::class);
+    }
 }
