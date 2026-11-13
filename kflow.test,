@@ -1,0 +1,17 @@
+[33mcommit 78c2b34faf7faf4d64f52b320aeb8e40a39050d2[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: unknown <luiscarlosfriastorres1@gmail.com>
+Date:   Thu Nov 5 10:01:19 2026 -0500
+
+    Controller: OK, route Login: OK
+
+[33mcommit da9cfdd66dd2645321f86d470249f55c3bbc7a99[m
+Author: unknown <luiscarlosfriastorres1@gmail.com>
+Date:   Wed Nov 4 09:46:26 2026 -0500
+
+    Models ContactProfile 0.1.0
+
+[33mcommit f8830428d5b80dc912ea3304b5aac22f99f76b5d[m
+Author: unknown <luiscarlosfriastorres1@gmail.com>
+Date:   Wed Oct 28 09:55:15 2026 -0500
+
+    Comienzo proyecto solo con la migracion de contact

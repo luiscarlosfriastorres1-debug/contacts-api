@@ -24,5 +24,8 @@ class ContactFactory extends Factory
         'user_id' => User::query()->inRandomOrder()->value("id") ?? User::factory(),
         'phone_number' => fake()->phoneNumber(),
         ];
+
+        
+
     }
 }

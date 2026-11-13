@@ -6,8 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class ContactProfile extends Model
 {
-  public function contact(){
-    return this->belongsTo(Contact::class);
-  }
+    protected $fillable = ['contact_id', 'c1', 'c2', 'c3'];
+
+    public function contact()
+    {
+        return $this->belongsTo(Contact::class);
+    }
 }
 

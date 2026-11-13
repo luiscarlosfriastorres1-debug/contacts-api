@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Auth\AuthenticationException;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -19,4 +22,18 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->shouldRenderJsonWhen(
             fn (Request $request) => $request->is('api/*') || $request->expectsJson(),
         );
+        $exceptions->render(fn (AuthenticationException $e, Request $request) =>
+        $request->is('api/*')
+            ? response()->json(['message' => 'No autenticado'], 401)
+            : null);
+
+        $exceptions->render(fn (AccessDeniedHttpException $e, Request $request) =>
+            $request->is('api/*')
+                ? response()->json(['message' => 'No tienes acceso a este recurso'], 403)
+                : null);
+
+        $exceptions->render(fn (NotFoundHttpException $e, Request $request) =>
+            $request->is('api/*')
+                ? response()->json(['message' => 'Recurso no encontrado'], 404)
+                : null);
     })->create();

@@ -24,6 +24,10 @@ Route::prefix('v1')->group(function () {
 
         Route::apiResource('contactos', ContactController::class);
 
+        Route::prefix('contactos')->group(function () {
+            Route::post('/crear', [ContactController::class, 'create'])->name('api.v1.contactos.crear');
+        });
+        
         Route::prefix('contactos/{contacto}')->group(function () {
             Route::get('/perfil', [ContactProfileController::class, 'show'])->name('api.v1.contactos.perfil.show');
             Route::post('/perfil', [ContactProfileController::class, 'store'])->name('api.v1.contactos.perfil.store');

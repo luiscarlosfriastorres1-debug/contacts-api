@@ -14,7 +14,11 @@ class ContactProfileController extends Controller
         $contact = $request->user()->contacts()->findOrFail($id);
         return $contact->profile()->updateOrCreate(
             ['contact_id'=>$id],
-            $request->validate(['c1'=>'required','c2'=>'required','c3'=>'required'])
+            $request->validate([
+                'c1'=>'required',
+                'c2'=>'required',
+                'c3'=>'required'
+                ])
         );
     }
 }
