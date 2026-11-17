@@ -11,7 +11,7 @@ class ContactController extends Controller
         return $request->user()->contacts()->with('profile')->get();
     }
 
-    public function create(Request $request){
+    public function store(Request $request){
         $data = $request->validate([
             'name'         => 'required|string|max:255',
             'phone_number' => 'required|string|max:30',
@@ -24,14 +24,20 @@ class ContactController extends Controller
 
         return response()->json(['message'=>'Contacto creado','contacto'=>$contacto], 201);
     }
+
+
     public function show(Request $request, $id){
         return $request->user()->contacts()->with('profile')->findOrFail($id);
     }
+
+
     public function update(Request $request, $id){
         $c = $request->user()->contacts()->findOrFail($id);
         $c->update($request->only(['name','phone_number','email']));
         return $c;
     }
+
+    
     public function destroy(Request $request, $id){
         $request->user()->contacts()->findOrFail($id)->delete();
         return response()->json(['message'=>'Contacto eliminado']);
