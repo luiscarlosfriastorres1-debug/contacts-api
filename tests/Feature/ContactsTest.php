@@ -173,3 +173,28 @@ it('actualizar un campo por ejemplo el telefono, no borra los demas campos', fun
 });
 
 
+
+it('actualiza contacto propio y no permite actualizar contacto ajeno', function () {
+    $user = User::factory()->create();
+    $otherUser = User::factory()->create();
+    $contact = Contact::factory()->for($user)->create([
+        'name' => 'Contacto original',
+        'phone_number' => '3001234567',
+        'email' => 'ana.torres@example.com'
+    ]);
+    Sanctum::actingAs($user);
+
+    $this->patchJson('/api/v1/contactos/'.$contact->id, [
+        'name' => 'Contacto actualizado',
+        'phone_number' => '3001234568',
+        'email' => 'ana.torres.actualizada@example.com'
+    ])
+        ->assertOk()
+        ->assertJsonFragment([
+            'name' => 'Contacto actualizado',
+            'phone_number' => '3001234568',
+            'email' => 'ana.torres.actualizada@example.com'
+        ]);
+});
+
+
